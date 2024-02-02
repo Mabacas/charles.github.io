@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Renting House Locator</title>
+  <style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #resultContainer {
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>Renting House Locator</h1>
+    <label for="locationInput">Enter your location:</label>
+    <input type="text" id="locationInput" placeholder="City, State">
+    <button onclick="findHouses()">Find Houses</button>
+    <div id="resultContainer"></div>
+  </div>
+
+  <script src="script.js">
+    function findHouses() {
+  const locationInput = document.getElementById('locationInput');
+  const resultContainer = document.getElementById('resultContainer');
+
+  // Simulated list of available houses
+  const houses = [
+    { name: 'Cozy Apartment', location: 'City A, State X', price: '$1000/month' },
+    { name: 'Spacious House', location: 'City B, State Y', price: '$1500/month' },
+    { name: 'Modern Condo', location: 'City C, State Z', price: '$1200/month' }
+    // Add more houses as needed
+  ];
+
+  const userLocation = locationInput.value;
+
+  // Filter houses based on the entered location
+  const filteredHouses = houses.filter(house => house.location.toLowerCase().includes(userLocation.toLowerCase()));
+
+  // Display the result
+  resultContainer.innerHTML = '';
+
+  if (filteredHouses.length > 0) {
+    filteredHouses.forEach(house => {
+      const houseCard = document.createElement('div');
+      houseCard.className = 'house-card';
+      houseCard.innerHTML = `<h3>${house.name}</h3><p>${house.location}</p><p>${house.price}</p>`;
+      resultContainer.appendChild(houseCard);
+    });
+  } else {
+    resultContainer.innerHTML = '<p>No houses found in the specified location.</p>';
+  }
+}
+
+  </script>
+</body>
+</html>
